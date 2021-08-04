@@ -1,0 +1,34 @@
+﻿@page "/"
+
+@using Syncfusion.EJ2.Blazor.FileManager
+
+<EjsFileManager RootAliasName="Root Folder">
+    <FileManagerEvents ToolbarItemClicked="toolbarClick" OnMenuClick="menuClick"></FileManagerEvents>
+    <FileManagerAjaxSettings Url="/api/FileManagerDB/SQLFileOperations"
+                             GetImageUrl="/api/FileManagerDB/SQLGetImage"
+                             UploadUrl="/api/FileManagerDB/SQLUpload"
+                             DownloadUrl="/api/FileManagerDB/SQLDownload">
+    </FileManagerAjaxSettings>
+    <FileManagerContextMenuSettings File="@Items" Folder="@Items"></FileManagerContextMenuSettings>
+    <FileManagerToolbarSettings Items="@ToolbarItems"></FileManagerToolbarSettings>
+</EjsFileManager>
+@code{
+    public string[] Items = new string[] { "Open", "|", "Delete", "Download", "Rename", "|", "Details", "Custom" };
+    public string[] ToolbarItems = new string[] { "NewFolder", "Upload", "Delete", "Download", "Rename", "SortBy", "Refresh", "Selection", "View", "Details", "Custom" };
+    public void toolbarClick(ToolbarClickEventArgs args)
+    {
+        if (args.Item.Text == "Custom")
+        {
+            // Perform the operation based on your requirement.
+            System.Diagnostics.Debug.Write("Custom item clicked");
+        }
+    }
+    public void menuClick(MenuClickEventArgs args)
+    {
+        if (args.Item.Text == "Custom")
+        {
+            // Perform the operation based on your requirement.
+            System.Diagnostics.Debug.WriteLine("Custom item clicked");
+        }
+    }
+}
